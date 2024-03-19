@@ -60,6 +60,10 @@ add_subdirectory(src/wgldisplay)
 add_subdirectory(src/windisplay)
 add_subdirectory(src/x11display)
 
+# Added by Germanunkol:
+add_subdirectory(src/ccdik)
+add_subdirectory(src/trail)
+
 # Creates a metalib, so should go after
 add_subdirectory(src/tinydisplay)
 
@@ -196,6 +200,15 @@ build_apps = direct.dist.commands:finalize_distribution_options
   endif()
 
   export_targets(Python NAMESPACE "Panda3D::Python::" COMPONENT CoreDevel)
+
+
+  ### CCDIK:
+  add_python_module(panda3d.ccdik p3ccdik IMPORT panda3d.core COMPONENT CCDIK)
+  export_targets(CCDIK NAMESPACE "Panda3D::Python::" COMPONENT CCDIKDevel)
+  ### Trail:
+  add_python_module(panda3d.trail p3trail IMPORT panda3d.core COMPONENT TRAIL)
+  export_targets(TRAIL NAMESPACE "Panda3D::Python::" COMPONENT CCDIKTrail)
+
 endif()
 
 export_targets(Core COMPONENT CoreDevel)

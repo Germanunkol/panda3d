@@ -58,3 +58,4 @@ install(TARGETS p3vision
 install(FILES ${P3VISION_HEADERS} COMPONENT VisionDevel DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/panda3d)
 
 export_targets(Vision COMPONENT VisionDevel)
+
