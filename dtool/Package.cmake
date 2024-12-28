@@ -203,7 +203,7 @@ if(WANT_PYTHON_VERSION)
 endif()
 
 get_directory_property(_old_cache_vars CACHE_VARIABLES)
-find_package(Python ${WANT_PYTHON_VERSION} QUIET COMPONENTS Interpreter Development)
+find_package(Python ${WANT_PYTHON_VERSION} QUIET COMPONENTS Interpreter Development.Module)
 
 if(Python_FOUND)
   set(PYTHON_FOUND ON)
