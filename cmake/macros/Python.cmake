@@ -48,7 +48,10 @@ function(add_python_target target)
   string(REPLACE "." "/" slash_namespace "${namespace}")
 
   add_library(${target} ${MODULE_TYPE} ${sources})
-  target_link_libraries(${target} PKG::PYTHON)
+  target_include_directories(${target} PRIVATE ${PYTHON_INCLUDE_DIRS})
+  target_link_libraries(${target} Python::Module)
+  #target_link_libraries(${target} Python::Module)#PKG::PYTHON::Module)
+  #target_link_libraries(${target} ${PYTHON_LIBRARIES})#PKG::PYTHON::Module)
 
   if(BUILD_SHARED_LIBS)
     set(_outdir "${PANDA_OUTPUT_DIR}/${slash_namespace}")
