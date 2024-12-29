@@ -61,9 +61,9 @@ add_subdirectory(src/windisplay)
 add_subdirectory(src/x11display)
 
 # Added by Germanunkol:
-add_subdirectory(src/ccdik)
+add_subdirectory(src/ccdik/cpp/ccdik)
 add_subdirectory(src/trail)
-add_subdirectory(src/ragdoll)
+#add_subdirectory(src/ragdoll)
 add_subdirectory(src/navmesh)
 
 # Creates a metalib, so should go after
@@ -211,8 +211,8 @@ build_apps = direct.dist.commands:finalize_distribution_options
   add_python_module(panda3d.trail p3trail IMPORT panda3d.core COMPONENT TRAIL)
   export_targets(TRAIL NAMESPACE "Panda3D::Python::" COMPONENT TrailDevel)
   ### Ragdolls:
-  add_python_module(panda3d.ragdoll p3ragdoll IMPORT panda3d.core COMPONENT RAGDOLL)
-  export_targets(RAGDOLL NAMESPACE "Panda3D::Python::" COMPONENT RagdollDevel)
+  #add_python_module(panda3d.ragdoll p3ragdoll IMPORT panda3d.core COMPONENT RAGDOLL)
+  #export_targets(RAGDOLL NAMESPACE "Panda3D::Python::" COMPONENT RagdollDevel)
   ### NavMesh:
   add_python_module(panda3d.navmesh p3navmesh IMPORT panda3d.core COMPONENT NAVMESH)
   export_targets(NAVMESH NAMESPACE "Panda3D::Python::" COMPONENT NavmeshDevel)

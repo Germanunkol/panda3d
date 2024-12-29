@@ -1,0 +1,12 @@
+[submodule "panda/src/ragdoll"]
+	path = panda/src/ragdoll
+	url = git@github.com:Germanunkol/BulletRagdoll.git
+[submodule "panda/src/navmesh"]
+	path = panda/src/navmesh
+	url = git@github.com:Germanunkol/panda3d-navmesh.git
+[submodule "panda/src/ccdik"]
+	path = panda/src/ccdik
+	url = git@github.com:Germanunkol/CCD-IK-Panda3D.git
+[submodule "panda/src/trail"]
+	path = panda/src/trail
+	url = git@github.com:Germanunkol/panda3d_trail.git
