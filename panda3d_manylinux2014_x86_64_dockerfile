@@ -1,0 +1,36 @@
+FROM quay.io/pypa/manylinux2014_x86_64
+
+#
+# Begin Panda3D section
+#
+
+# Install some dependencies we'll need later
+RUN yum -y install wget alsa-lib-devel flex
+
+# libpulse headers
+RUN curl -O https://freedesktop.org/software/pulseaudio/releases/pulseaudio-9.0.tar.gz && \
+    tar -xzf pulseaudio-9.0.tar.gz && \
+    mkdir /usr/local/include/pulse/ && \
+    cp -r pulseaudio-9.0/src/pulse/*.h /usr/local/include/pulse/ && \
+    touch /usr/lib64/libpulse.so
+
+# Build thirdparty libraries
+ARG THIRDPARTY_BRANCH=main
+ENV MAKEPANDA_THIRDPARTY=/root/thirdparty
+ADD https://codeload.github.com/rdb/panda3d-thirdparty/zip/$THIRDPARTY_BRANCH /root/thirdparty.zip
+RUN cd /root && unzip thirdparty.zip && mv panda3d-thirdparty-$(echo -n $THIRDPARTY_BRANCH | tr / -) thirdparty
+RUN export SOURCE_DATE_EPOCH=$(stat -c %Y /root/thirdparty/CMakeLists.txt); \
+    mkdir /root/thirdparty/build; \
+    cd /root/thirdparty/build; \
+    cmake .. && PATH=/opt/python/cp39-cp39/bin:$PATH make VERBOSE=1 && rm -rf /root/thirdparty/build
+
+# Extra Packages for Panda3D
+RUN yum -y install gtk2-devel gtk3-devel mesa-libEGL-devel mesa-libGLES-devel
+#RUN yum -y install libjpeg-devel openal-soft-devel.x86_64
+
+# Extract static Python libraries we'll need for deploy-stub
+RUN tar -C /opt/_internal -xvf /opt/_internal/static-libs-for-embedding-only.tar.xz
+
+# Downgrade patchelf due to pypa/manylinux#1421
+RUN pipx install --force 'patchelf<0.17'
+
