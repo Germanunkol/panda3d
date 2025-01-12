@@ -631,6 +631,11 @@ class build_apps(setuptools.Command):
             arch = platform[6:]
             pip_args += ['--platform', 'manylinux2014_' + arch]
 
+        #if platform.startswith('manylinux_2_28_'):
+        #    # Also accept manylinux.
+        #    arch = platform[15:]
+        #    pip_args += ['--platform', 'manylinux_2_17_' + arch]
+
         if self.use_optimized_wheels:
             pip_args += [
                 '--extra-index-url', self.optimized_wheel_index
@@ -638,6 +643,8 @@ class build_apps(setuptools.Command):
 
         for index in self.pypi_extra_indexes:
             pip_args += ['--extra-index-url', index]
+
+        print("Running pip with arguments:", " ".join(pip_args))
 
         try:
             subprocess.check_call([sys.executable, '-m', 'pip'] + pip_args)
